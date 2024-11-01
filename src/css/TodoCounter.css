@@ -9,5 +9,6 @@
 
 .TodoCounter span
 {
-    font-weight:700
+    font-weight:700;
+    color: #D30C7B;
 }
