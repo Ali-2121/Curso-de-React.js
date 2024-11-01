@@ -1,10 +1,11 @@
 
-function TodoItem() {
+function TodoItem(props) {
     return(
       <p>
-        Holi esto es un item
+       {props.text}
+       <span>{props.completed? '✔': 'X'}</span>
       </p>
-        
+   
     )
   }
 
