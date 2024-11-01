@@ -4,7 +4,6 @@ import { TodoSearch } from './Components/TodoSearch';
 import { TodoList } from './Components/TodoList';
 import { TodoItem } from './Components/TodoItem';
 import { CreateTodoButton } from './Components/CreateTodoButton';
-import './App.css';
 
 function App() {
 
@@ -18,8 +17,8 @@ function App() {
 
   return (
     //React.Fragment Permite tener un contenedor de todos nuestros compoenentes
-    <React.Fragment>
-
+    //<React.Fragment>
+    <>
       <TodoCounter completed={10} total={20}/>
       <TodoSearch/>
 
@@ -34,8 +33,8 @@ function App() {
       </TodoList>
 
       <CreateTodoButton/>
-    </React.Fragment>
-      
+    {/* </React.Fragment> */}
+    </>
   );
 }
 
