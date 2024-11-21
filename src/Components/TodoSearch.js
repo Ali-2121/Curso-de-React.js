@@ -1,14 +1,16 @@
 import './../css/TodoSearch.css';
 
-function TodoSearch() {
+function TodoSearch({
+   searchValue,
+   setSearchValue,
+ 
+}) {
   return (
     <input
       placeholder="Ingresa una actividad"
       className="TodoSearch"
       onChange={(event)=>{
-        console.log("escribiendo")
-        console.log(event.target.value)
-        console.log(event.target)
+        setSearchValue(event.target.value);
       }}
     />
   );

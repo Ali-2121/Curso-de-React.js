@@ -5,22 +5,27 @@ import { TodoList } from './Components/TodoList';
 import { TodoItem } from './Components/TodoItem';
 import { CreateTodoButton } from './Components/CreateTodoButton';
 
+const defaultTodos = [
+  {text:'Levantarse', completed: true},
+  {text:'Desayunar', completed: true},
+  {text:'Lavarse los dientes', completed: false}
+]
 function App() {
+  const [todos, setTodos] =React.useState([defaultTodos]);
+  //Este estado debe estar en el componente padre, pues así debe ser la comunicación, de padres a hijos, no al revés.
+  const [searchValue, setSearchValue] = React.useState('');
 
-  const defaultTodos = [
-    {text:'Bañarse', completed: false},
-    {text:'Comer', completed: true},
-    {text:'Hacer ejercicio', completed: true},
-    {text:'Dormir', completed: false},
-    {text:'Bailar', completed: false}
-  ]
+  console.log('Los usuarios buscan todos de: ' +  searchValue)
 
   return (
     //React.Fragment Permite tener un contenedor de todos nuestros compoenentes
     //<React.Fragment>
     <>
       <TodoCounter completed={10} total={20}/>
-      <TodoSearch/>
+      <TodoSearch
+       searchValue = {searchValue}
+       setSearchValue = {setSearchValue}
+      />
 
       <TodoList>
         {defaultTodos.map( todo =>(
