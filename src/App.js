@@ -27,7 +27,16 @@ function App() {
       return todoText.includes(searchText);
     }
   )
-  console.log('Los usuarios buscan todos de: ' +  searchValue)
+
+  const completeTodo = (text) =>{
+    //Copia del array de todos con todos sus elementos previos
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex(
+      (todo) => todo.text == text
+    );
+    newTodos[todoIndex].completed = true;
+    setTodos(newTodos);
+  };
 
   return (
     //React.Fragment Permite tener un contenedor de todos nuestros compoenentes
@@ -47,6 +56,7 @@ function App() {
             key={todo.text} 
             text={todo.text}
             completed={todo.completed}
+            onComplete = { () => completeTodo(todo.text)}
           />
         ))}
       </TodoList>
