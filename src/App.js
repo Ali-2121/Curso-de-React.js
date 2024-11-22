@@ -9,7 +9,7 @@ const defaultTodos = [
   {text:'Levantarse', completed: true},
   {text:'Desayunar', completed: true},
   {text:'Lavarse los dientes', completed: false},
-  {text:'Ir a la escuela', completed: true},
+  {text:'Ir a la escuela', completed: false},
 ]
 function App() {
   const [todos, setTodos] =React.useState(defaultTodos);
@@ -21,7 +21,10 @@ function App() {
   const totalTodos = todos.length;
 
   const searchedTodos = todos.filter(
-    (todo) => { return todo.text.toLocaleLowerCase().includes(searchValue.toLowerCase())
+    (todo) => { 
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
     }
   )
   console.log('Los usuarios buscan todos de: ' +  searchValue)
