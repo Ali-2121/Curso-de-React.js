@@ -5,14 +5,29 @@ import { TodoList } from './Components/TodoList';
 import { TodoItem } from './Components/TodoItem';
 import { CreateTodoButton } from './Components/CreateTodoButton';
 
-const defaultTodos = [
-  {text:'Levantarse', completed: true},
-  {text:'Desayunar', completed: true},
-  {text:'Lavarse los dientes', completed: false},
-  {text:'Ir a la escuela', completed: false},
-]
+// const defaultTodos = [
+//   {text:'Levantarse', completed: true},
+//   {text:'Desayunar', completed: true},
+//   {text:'Lavarse los dientes', completed: false},
+//   {text:'Ir a la escuela', completed: false},
+// ]
+
+//localStorage.setItem('TODOS_V1_ALI', defaultTodos)
+//localStorage.removeItem('TODOS_V1_ALI')
+
 function App() {
-  const [todos, setTodos] =React.useState(defaultTodos);
+  const localStorageTodos = localStorage.getItem('TODOS_V1_ALI');
+
+  let parsedTodos;
+
+  if(!localStorageTodos){
+    localStorage.setItem('TODOS_V1_ALI', JSON.stringify([]));
+    parsedTodos = [];
+  }else{
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+  const [todos, setTodos] =React.useState(parsedTodos);
   //Este estado debe estar en el componente padre, pues así debe ser la comunicación, de padres a hijos, no al revés.
   const [searchValue, setSearchValue] = React.useState('');
 
