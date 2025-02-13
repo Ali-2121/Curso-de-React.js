@@ -1,4 +1,4 @@
-# 📌 Local Storage en JavaScript
+# 📌 Local Storage 
 
 El **Local Storage** permite la persistencia de datos en el navegador, asegurando que la información no se pierda incluso si el usuario cierra la página o reinicia el navegador.  
 

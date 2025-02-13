@@ -15,19 +15,32 @@ import { CreateTodoButton } from './Components/CreateTodoButton';
 // localStorage.setItem('TODOS_V1_ALI', JSON.stringify(defaultTodos)
 // localStorage.removeItem('TODOS_V1_ALI')
 
-function App() {
-  const localStorageTodos = localStorage.getItem('TODOS_V1_ALI');
-
-  let parsedTodos;
-
-  if(!localStorageTodos){
-    localStorage.setItem('TODOS_V1_ALI', JSON.stringify([]));
-    parsedTodos = [];
+function useLocalStorage(itemName, initialValue){
+  const localStorageItem = localStorage.getItem(itemName);
+  
+  let parsedItem;
+  
+  if(!localStorageItem){
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
   }else{
-    parsedTodos = JSON.parse(localStorageTodos);
+    parsedItem = JSON.parse(localStorageItem);
   }
 
-  const [todos, setTodos] =React.useState(parsedTodos);
+  //Se crea hasta que se va a revisar a localStorage y se define que lo que exista ahí va a ser el estado inicial del custom hook
+  const [item, setItem] = React.useState(parsedItem);
+  
+  const saveItem = (newItem)=>{
+    localStorage.setItem(itemName, JSON.stringify(newItem))
+    setItem(newItem);
+  }
+
+  return [item, setItem];
+}
+
+function App() {
+
+  const [todos, saveTodos] =useLocalStorage('TODOS_V1_ALI',[]);
   //Este estado debe estar en el componente padre, pues así debe ser la comunicación, de padres a hijos, no al revés.
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -42,11 +55,6 @@ function App() {
       return todoText.includes(searchText);
     }
   )
-
-  const saveTodos = (newTodos)=>{
-    localStorage.setItem('TODOS_V1_ALI', JSON.stringify(newTodos))
-    setTodos(newTodos);
-  }
   
   const completeTodo = (text) =>{
     //Copia del array de todos con todos sus elementos previos
