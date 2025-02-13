@@ -5,15 +5,15 @@ import { TodoList } from './Components/TodoList';
 import { TodoItem } from './Components/TodoItem';
 import { CreateTodoButton } from './Components/CreateTodoButton';
 
-// const defaultTodos = [
-//   {text:'Levantarse', completed: true},
-//   {text:'Desayunar', completed: true},
-//   {text:'Lavarse los dientes', completed: false},
-//   {text:'Ir a la escuela', completed: false},
-// ]
+//  const defaultTodos = [
+//    {text:'Levantarse', completed: true},
+//    {text:'Desayunar', completed: true},
+//    {text:'Lavarse los dientes', completed: false},
+//    {text:'Ir a la escuela', completed: false},
+//  ]
 
-//localStorage.setItem('TODOS_V1_ALI', defaultTodos)
-//localStorage.removeItem('TODOS_V1_ALI')
+// localStorage.setItem('TODOS_V1_ALI', JSON.stringify(defaultTodos)
+// localStorage.removeItem('TODOS_V1_ALI')
 
 function App() {
   const localStorageTodos = localStorage.getItem('TODOS_V1_ALI');
@@ -43,6 +43,11 @@ function App() {
     }
   )
 
+  const saveTodos = (newTodos)=>{
+    localStorage.setItem('TODOS_V1_ALI', JSON.stringify(newTodos))
+    setTodos(newTodos);
+  }
+  
   const completeTodo = (text) =>{
     //Copia del array de todos con todos sus elementos previos
     const newTodos = [...todos];
@@ -50,7 +55,7 @@ function App() {
       (todo) => todo.text == text
     );
     newTodos[todoIndex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
   const deleteTodo = (text) =>{
     //Copia del array de todos con todos sus elementos previos
@@ -59,7 +64,7 @@ function App() {
       (todo) => todo.text == text
     );
     newTodos.splice(todoIndex,1);
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   return (

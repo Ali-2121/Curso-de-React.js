@@ -1,8 +1,21 @@
-## Local Storage 
-Ayuda a la persistencia de datos, para que la información no se borre a pesar de que el usuario salga del navegador. 
-Suele tener errores, en ocasiones lo más sencillo es solo borrar la información y volver a iniciar. 
-Los TODO's iniciales ya no serán definido en un array en el código, serán extraídos de localStorage y también se actualizarán ahí. 
+# 📌 Local Storage en JavaScript
 
-localStorage no puede guardar estructuras complejas solo puede guardar Strings. Para eso usaremos JSON.stringyfy que ayuda a convertir en string el javascript.
-JSON.parse ayuda a devolver el string a algo que se pueda usar en Javascript.
-Así que, para guardar algo en localStorage, se debe usar el JSON.stringyfy y para leer algo del localStorage, se debe usar el JSON.parse para que vuelva a ser algo que se pueda usar en JavaScript.
+El **Local Storage** permite la persistencia de datos en el navegador, asegurando que la información no se pierda incluso si el usuario cierra la página o reinicia el navegador.  
+
+## 🔹 Características  
+- Los datos almacenados en `localStorage` permanecen hasta que sean eliminados manualmente o por código.  
+- No tiene límite de sesión, a diferencia de `sessionStorage`, que borra la información al cerrar el navegador.  
+- Solo puede almacenar **cadenas de texto (strings)**.  
+
+## ⚠️ Posibles errores y solución  
+A veces, el `localStorage` puede presentar errores o datos corruptos. En estos casos, la solución más sencilla suele ser **borrar la información** y reiniciar el proceso.  
+
+## 📌 Uso en una lista de TODOs  
+Anteriormente, los **TODOs** iniciales se definían en un array dentro del código. Ahora, serán extraídos y actualizados en `localStorage` para garantizar persistencia.  
+
+### 🛠️ Conversión de datos con JSON  
+Dado que `localStorage` solo almacena **strings**, es necesario convertir estructuras de datos complejas:  
+
+- **Guardar datos** en `localStorage`  
+  ```js
+  localStorage.setItem("todos", JSON.stringify(listaDeTodos));
