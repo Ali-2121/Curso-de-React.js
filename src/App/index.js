@@ -1,9 +1,10 @@
 import React from 'react';
-import { TodoCounter } from './Components/TodoCounter';
-import { TodoSearch } from './Components/TodoSearch';
-import { TodoList } from './Components/TodoList';
-import { TodoItem } from './Components/TodoItem';
-import { CreateTodoButton } from './Components/CreateTodoButton';
+import { TodoCounter } from '../TodoCounter';
+import { TodoSearch } from '../TodoSearch';
+import { TodoList } from '../TodoList';
+import { TodoItem } from '../TodoItem';
+import { CreateTodoButton } from '../CreateTodoButton';
+import { useLocalStorage } from './useLocalStorage';
 
 //  const defaultTodos = [
 //    {text:'Levantarse', completed: true},
@@ -14,29 +15,6 @@ import { CreateTodoButton } from './Components/CreateTodoButton';
 
 // localStorage.setItem('TODOS_V1_ALI', JSON.stringify(defaultTodos)
 // localStorage.removeItem('TODOS_V1_ALI')
-
-function useLocalStorage(itemName, initialValue){
-  const localStorageItem = localStorage.getItem(itemName);
-  
-  let parsedItem;
-  
-  if(!localStorageItem){
-    localStorage.setItem(itemName, JSON.stringify(initialValue));
-    parsedItem = initialValue;
-  }else{
-    parsedItem = JSON.parse(localStorageItem);
-  }
-
-  //Se crea hasta que se va a revisar a localStorage y se define que lo que exista ahí va a ser el estado inicial del custom hook
-  const [item, setItem] = React.useState(parsedItem);
-  
-  const saveItem = (newItem)=>{
-    localStorage.setItem(itemName, JSON.stringify(newItem))
-    setItem(newItem);
-  }
-
-  return [item, setItem];
-}
 
 function App() {
 
@@ -60,7 +38,7 @@ function App() {
     //Copia del array de todos con todos sus elementos previos
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     );
     newTodos[todoIndex].completed = true;
     saveTodos(newTodos);
@@ -69,7 +47,7 @@ function App() {
     //Copia del array de todos con todos sus elementos previos
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     );
     newTodos.splice(todoIndex,1);
     saveTodos(newTodos);

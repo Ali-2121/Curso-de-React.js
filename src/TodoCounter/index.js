@@ -5,7 +5,7 @@ ejemplos:
 De esta forma por dentro del componente puedes llamar a sus propiedades
   function TodoCounter({ total, completed })
 De esta forma, solo las llamas dentro del código donde las necesites */
-import './../css/TodoCounter.css';
+import './TodoCounter.css';
 
 function TodoCounter({ total, completed }) {
   return (
