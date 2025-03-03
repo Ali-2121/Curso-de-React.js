@@ -2,19 +2,24 @@ import React from 'react';
 import { AppUI } from './AppUI';
 import { useLocalStorage } from './useLocalStorage';
 
-//  const defaultTodos = [
-//    {text:'Levantarse', completed: true},
-//    {text:'Desayunar', completed: true},
-//    {text:'Lavarse los dientes', completed: false},
-//    {text:'Ir a la escuela', completed: false},
-//  ]
+//   const defaultTodos = [
+//     {text:'Levantarse', completed: true},
+//     {text:'Desayunar', completed: true},
+//     {text:'Lavarse los dientes', completed: false},
+//     {text:'Ir a la escuela', completed: false},
+//   ]
 
-// localStorage.setItem('TODOS_V1_ALI', JSON.stringify(defaultTodos)
-// localStorage.removeItem('TODOS_V1_ALI')
+//  localStorage.setItem('TODOS_V1_ALI', JSON.stringify(defaultTodos)
+ //localStorage.removeItem('TODOS_V1_ALI')
 
 function App() {
 
-  const [todos, saveTodos] =useLocalStorage('TODOS_V1_ALI',[]);
+  const {
+    item:todos, 
+    saveItem:saveTodos,
+    loading,
+    error
+  } =useLocalStorage('TODOS_V1_ALI',[]);
   //Este estado debe estar en el componente padre, pues así debe ser la comunicación, de padres a hijos, no al revés.
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -22,12 +27,12 @@ function App() {
 
   const totalTodos = todos.length;
 
-  console.log('1')
+
 
   React.useEffect(()=>{
     console.log('2')
   },[totalTodos])
-  console.log('3')
+
 
   const searchedTodos = todos.filter(
     (todo) => { 
@@ -58,6 +63,8 @@ function App() {
 
   return(
     <AppUI
+      loading={loading}
+      error={error}
       completeTodo={completeTodo}
       totalTodos={totalTodos}
       searchValue={searchValue}
