@@ -6,56 +6,52 @@ import { TodosLoading } from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
 import { CreateTodoButton } from '../CreateTodoButton';
+import {TodoContext} from '../TodoContext'
 
-function AppUI({
-    error,
-    loading,
-    completeTodo,
-    totalTodos,
-    searchValue,
-    setSearchValue,
-    searchedTodos,
-    completedTodos,
-    deleteTodo
-}){
-    return (
+function AppUI() {
+  return (
     //React.Fragment Permite tener un contenedor de todos nuestros compoenentes
     //<React.Fragment>
     <>
-      <TodoCounter 
-      completed={completedTodos} 
-      total={totalTodos}/>
-      <TodoSearch
-       searchValue = {searchValue}
-       setSearchValue = {setSearchValue}
-      />
+      <TodoCounter />
+      <TodoSearch/>
 
-      <TodoList>
-        {loading && 
-        <>
-        <TodosLoading/>
-        <TodosLoading/>
-        <TodosLoading/>
-        </>}
-        {error && <TodosError/>}
-        {(!loading && searchedTodos.length === 0) && <EmptyTodos/>}
+      <TodoContext.Consumer>
+        {/* Esto hacer un return dentro de otro return  */}
+        {({
+            error,
+            loading,
+            searchedTodos,
+            completeTodo,
+            deleteTodo
+        }) => (
+          <TodoList>
+            {loading &&
+              <>
+                <TodosLoading />
+                <TodosLoading />
+                <TodosLoading />
+              </>}
+            {error && <TodosError />}
+            {(!loading && searchedTodos.length === 0) && <EmptyTodos />}
 
-        {searchedTodos.map( todo =>(
-          <TodoItem 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed}
-            onComplete = { () => completeTodo(todo.text)}
-            onDelete = { () => deleteTodo(todo.text)}
-          />
-        ))}
-      </TodoList>
-
-      <CreateTodoButton/>
-    {/* </React.Fragment> */}
+            {searchedTodos.map(todo => (
+              <TodoItem
+                key={todo.text}
+                text={todo.text}
+                completed={todo.completed}
+                onComplete={() => completeTodo(todo.text)}
+                onDelete={() => deleteTodo(todo.text)}
+              />
+            ))}
+          </TodoList>
+        )}
+      </TodoContext.Consumer>
+      <CreateTodoButton />
+      {/* </React.Fragment> */}
     </>
 
   );
 }
 
-export{ AppUI };
+export { AppUI };
