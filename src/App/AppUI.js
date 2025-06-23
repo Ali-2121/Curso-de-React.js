@@ -7,8 +7,17 @@ import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
 import { CreateTodoButton } from '../CreateTodoButton';
 import {TodoContext} from '../TodoContext'
+import React from 'react';
 
 function AppUI() {
+
+  const {
+    error,
+            loading,
+            searchedTodos,
+            completeTodo,
+            deleteTodo
+  } = React.useContext(TodoContext);
   return (
     //React.Fragment Permite tener un contenedor de todos nuestros compoenentes
     //<React.Fragment>
@@ -16,15 +25,7 @@ function AppUI() {
       <TodoCounter />
       <TodoSearch/>
 
-      <TodoContext.Consumer>
-        {/* Esto hacer un return dentro de otro return  */}
-        {({
-            error,
-            loading,
-            searchedTodos,
-            completeTodo,
-            deleteTodo
-        }) => (
+      
           <TodoList>
             {loading &&
               <>
@@ -45,8 +46,6 @@ function AppUI() {
               />
             ))}
           </TodoList>
-        )}
-      </TodoContext.Consumer>
       <CreateTodoButton />
       {/* </React.Fragment> */}
     </>

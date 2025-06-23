@@ -3,6 +3,7 @@
 ## ✨ ¿Qué es React Context?
 
 React Context es una herramienta integrada en React que permite crear **estados globales**, facilitando la comunicación entre componentes sin necesidad de pasar props manualmente a través de todos los niveles del árbol de componentes (**prop drilling**).
+Se pueden tener tantos contextos como sea necesario.
 
 ---
 
@@ -72,7 +73,7 @@ Todo lo que esté dentro del `Provider` puede acceder a `valor` mediante `Consum
 
 ---
 
-### ✨ Alternativa moderna: `useContext`
+### ✨ Alternativa: `useContext`
 
 ```jsx
 import { useContext } from 'react';
@@ -81,6 +82,7 @@ const valor = useContext(MyContext);
 
 - Es la forma moderna y preferida para consumir un contexto.
 - Hace el código más limpio y conciso.
+- Esto es un  react hook 
 
 ---
 
